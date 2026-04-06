@@ -46,6 +46,20 @@
     <div class="column">
         <h3>Page {{ page }}</h3>
 
+        <!-- sort and filter(exercise 6 and 7) -->
+         <form method="GET" action="/boats">
+            Sort:
+                <select name="sort">
+                    <option value="">None</option>
+                     <option value="id" {% if sort == 'id' %}selected{% endif %}>ID</option>
+                <option value="name" {% if sort == 'name' %}selected{% endif %}>Name</option>
+                <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Price Low-High</option>
+
+           <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price High-Low</option>
+            </select>
+
+         </form>
+
         <div class="flex-box">
             {% for boat in boats %}
                 <div class="boat">

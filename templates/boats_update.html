@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block body %}
+    <h1>Update a Boat</h1>
+
+    {% if success %}
+        <h2>{{ success }}</h2>
+    {% endif %}
+
+    <!-- Step 1: search by ID -->
+    {% if not boat %}
+        <form action="/update" method="POST">
+            <input type="hidden" name="step" value="search">
+            <input type="number" name="id" placeholder="Enter boat ID">
+            <input type="submit" value="Find Boat">
+        </form>
+    {% endif %}
+
+    {% if not_found %}
+        <p>No boat found with that ID.</p>
+    {% endif %}
+
+    <!-- Step 2: edit form -->
+    {% if boat %}
+        <form action="/update" method="POST">
+            <input type="hidden" name="step" value="confirm">
+            <input type="hidden" name="id" value="{{ boat['id'] }}">
+
+            <p>ID: {{ boat['id'] }} (cannot be changed)</p>
+            Name: <input type="text" name="name" value="{{ boat['name'] }}"><br>
+            Type: <input type="text" name="type" value="{{ boat['type'] }}"><br>
+            Owner ID: <input type="number" name="owner_id" value="{{ boat['owner_id'] }}"><br>
+            Price: <input type="number" name="rental_price" value="{{ boat['rental_price'] }}" step="0.01"><br>
+            <input type="submit" value="Save Changes">
+        </form>
+    {% endif %}
+
+{% endblock %}

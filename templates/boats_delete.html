@@ -40,8 +40,22 @@
         {% endif %}
 
         <form action="/delete" method="POST">
+            <input type="hidden" name="step" value="search">
             <input type="number" name="id" placeholder="ID" class="input_field"> <br>
-            <input type="submit" value="Submit" class="input_submit">
+            <input type="submit" value="Find boat" class="input_submit">
         </form>
+        {% if boat %}
+            <h3>Found: {{ boat['name'] }} ({{ boat['type'] }})</h3>
+            <form action="/delete" method="POST">
+            <input type="hidden" name="step" value="confirm"> 
+            <input type="hidden" name="id" value="{{ boat['id'] }}">
+            <input type="submit" value="Confirm Delete" class="input_submit">
+            </form>
+            {% endif %}
+
+    <!-- if no boat was found show a message -->
+    {% if not_found %}
+        <h3>No boat found with that ID.</h3>
+    {% endif %}
     </div>
 {% endblock %}

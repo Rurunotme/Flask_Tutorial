@@ -1,0 +1,21 @@
+{%- extends "base.html" -%}
+{%- block body -%}
+    <h1>Search Boats</h1>
+
+    <form action="/search" method="POST">
+        <input type="text" name="query" value="{{ query or ''}}" placeholder="Search by name or type">
+        <input type="submit" value="Search">
+    </form>
+
+    {% if boats is not none %}
+        <h3>Results for "{{ query }}":</h3>
+        {% for boat in results %}
+            <a href="/boats/detail/{{ boat['id'] }}">
+                <p>{{ boat['id'] }} - {{ boat['name'] }} - {{ boat['type'] }} - ${{ boat['rental_price'] }}</p>
+            </a>
+        {% endfor %}
+        {% if results | length < 1 %}
+            <p>No boats found.</p>
+        {% endif %}
+    {% endif %}
+{%- endblock -%}

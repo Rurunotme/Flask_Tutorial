@@ -1,0 +1,9 @@
+{%- extends "base.html" -%}
+{%- block body -%}
+    <h1>{{ boat['name'] }}</h1>
+    <p>ID: {{ boat['id'] }}</p>
+    <p>Type: {{ boat['type'] }}</p>
+    <p>Owner ID: {{ boat['owner_id'] }}</p>
+    <p>Price: ${{ boat['rental_price'] }}</p>
+    <a href="/boats">Back to boats</a>
+{%- endblock -%}
