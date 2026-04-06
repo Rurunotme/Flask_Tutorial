@@ -58,10 +58,24 @@
            <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price High-Low</option>
             </select>
 
-         </form>
+            Type:
+            <select name="type_filter">
+                <option value="">All</option>
+                {% for t in boat_types %}
+                <option value="{{ t[0] }}" {% if type_filter == t[0] %}selected{% endif %}>{{ t[0] }}</option>                
+                {% endfor %}
+            </select>
+             Min Price: <input type="number" name="min_price" value="{{ min_price }}" style="width:80px;">
+             Max Price: <input type="number" name="max_price" value="{{ max_price }}" style="width:80px;">
+
+        <input type="submit" value ="Apply">
+        <a href = "/boats">Reset</a>
+    </form>
 
         <div class="flex-box">
             {% for boat in boats %}
+            <!-- makes each boat clickable exercise 2 -->
+             <a href="/boats/detail/{{ boat['id'] }}" style="text-decoration: none; color: inherit;">
                 <div class="boat">
                     <ul>
                         <li>Boat id: {{ boat['id'] }}</li>
@@ -73,6 +87,7 @@
                         </ul>
                     </ul>
                 </div>
+             </a>
             {% endfor %}
 
             {% if boats | length < 1 %}
